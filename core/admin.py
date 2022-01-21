@@ -5,9 +5,11 @@ from django.contrib import admin
 #####################
 
 class UserAdminConfig(UserAdmin):
-    list_display = ['email', 'username', 'first_name', 'last_name']
+    '''User'''
+    ordering = ['-date_joined']
+    list_display = ['email', 'username', 'first_name', 'last_name', 'user_post']
     # Ref : https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.search_fields
-    search_fields = ['email', 'username']
+    search_fields = ['email', 'username', 'first_name', 'last_name']
     readonly_fields = ['date_joined', 'last_login']
     # define the sections
     # each one of these brackets are a section
@@ -22,7 +24,7 @@ class UserAdminConfig(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes' : ('wide',),
-            'fields' : ('email', 'username', 'first_name', 'last_name', 'password1', 'password2'),
+            'fields' : ('email', 'username', 'first_name', 'last_name', 'user_post', 'password1', 'password2'),
         }),
     )
 
