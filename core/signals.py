@@ -1,7 +1,8 @@
 from django.db.models.signals import post_save, post_delete
-from Student.models import StudentProfile
+from Student.models import Student
 from Teacher.models import Teacher
 from core.models import Account
+from Manager.models import Manager
 from django.dispatch import receiver
 ####################################
 
@@ -15,7 +16,7 @@ def CreateUserProfile(sender, instance, created, **kwargs):
         # Check user post
         if user.user_post == 'student':
             # create profile
-            profile = StudentProfile.objects.create(
+            profile = Student.objects.create(
                 user = user,
                 username = user.username,
                 email = user.email,
@@ -32,10 +33,20 @@ def CreateUserProfile(sender, instance, created, **kwargs):
                 first_name = user.first_name,
                 last_name = user.last_name,
             )
+        
+        elif user.user_post == 'manager':
+            # create profile
+            profile = Manager.objects.create(
+                user = user,
+                username = user.username,
+                email = user.email,
+                first_name = user.first_name,
+                last_name = user.last_name,
+            )
 
 
 # Delete account
-@receiver(post_delete, sender=StudentProfile)
+# @receiver(post_delete, sender=Student)
 def DeleteUserAcc(sender, instance, **kwargs):
     '''If admin delete the profile, this function will delete the user, too.'''
     
@@ -44,3 +55,7 @@ def DeleteUserAcc(sender, instance, **kwargs):
         user.delete()
     except:
         pass
+
+post_delete.connect(DeleteUserAcc, sender=Student)
+post_delete.connect(DeleteUserAcc, sender=Teacher)
+post_delete.connect(DeleteUserAcc, sender=Manager)
