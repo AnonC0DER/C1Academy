@@ -18,7 +18,7 @@ class UserAdminConfig(UserAdmin):
         (None, {'fields' : ('email', 'password')}),
         (_('Personal info'), {'fields' : ('username', 'first_name', 'last_name')}),
         (_('Activity'), {'fields' : ('date_joined', 'last_login')}),
-        (_('Permissions'), {'fields' : ('is_admin', 'is_active', 'is_staff', 'is_superuser')})
+        (_('Permissions'), {'fields' : ('is_admin', 'is_active', 'is_staff', 'is_superuser', 'groups')})
     )
 
     add_fieldsets = (
