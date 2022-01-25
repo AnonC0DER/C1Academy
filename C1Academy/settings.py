@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'Student.apps.StudentConfig',
     'Teacher.apps.TeacherConfig',
     'Manager.apps.ManagerConfig',
+    'Message.apps.MessageConfig',
     'core',
 ]
 
