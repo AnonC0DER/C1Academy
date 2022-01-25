@@ -34,3 +34,16 @@ class Student(models.Model):
             url = '/images/StudentImages/default.jpg'
 
         return url
+
+
+class HomeworkStudentAdd(models.Model):
+    '''Students' homework model'''
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='HomeworkImages/', null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.title
