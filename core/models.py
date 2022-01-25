@@ -16,7 +16,7 @@ class AccountManager(BaseUserManager):
             raise ValueError(_('Users must have an email address !'))
         
         # If the username is already used, raise an error
-        if not username:
+        elif not username:
             raise ValueError(_('Users must have an unique username !'))
 
         email = self.normalize_email(email)
