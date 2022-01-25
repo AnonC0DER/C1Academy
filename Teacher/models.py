@@ -13,7 +13,6 @@ class Teacher(models.Model):
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message='Phone number must be entered in the format: +98xxxxxxxxxx. Up to 15 numbers allowed.')
     phone_number = models.CharField(validators=[phone_regex], max_length=15)
     image = models.ImageField(upload_to='TeacherImages/', default='StudentImage/default.jpg')
-    # class =
     last_login = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True ,primary_key=True, editable=False)
@@ -38,8 +37,6 @@ class Classroom(models.Model):
     name = models.CharField(max_length=120)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, blank=True)
     class_hours = models.CharField(max_length=60, help_text='Set class hours -> 6:45PM - 8:00PM')
-    # home_work = models.ManyToManyField('HomeworkTeacherCanAdd')
-    # homework = models.ManyToManyField('HomeworkTeacherCanAdd')
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
@@ -57,3 +54,21 @@ class HomeworkTeacherAdd(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class LearningContent(models.Model):
+    '''Teacher can add learning content (Videos, images, etc.)'''
+    title = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='LearningContentImages/', null=True, blank=True)
+    video = models.FileField(upload_to='LearningContentVideos/', null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return self.title
+    
+
+
+
+
