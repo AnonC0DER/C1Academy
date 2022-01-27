@@ -1,4 +1,5 @@
 from django.db.models.signals import post_save, post_delete
+from django.contrib.auth.models import Group
 from Student.models import Student
 from Teacher.models import Teacher
 from core.models import Account
@@ -23,6 +24,10 @@ def CreateUserProfile(sender, instance, created, **kwargs):
                 first_name = user.first_name,
                 last_name = user.last_name,
             )
+            
+            # Set user permissions
+            group = Group.objects.get(name='Student')
+            user.groups.add(group)
 
         elif user.user_post == 'teacher':
             # create profile
@@ -33,6 +38,9 @@ def CreateUserProfile(sender, instance, created, **kwargs):
                 first_name = user.first_name,
                 last_name = user.last_name,
             )
+            # Set user permissions
+            group = Group.objects.get(name='Teacher')
+            user.groups.add(group)
         
         elif user.user_post == 'manager':
             # create profile
@@ -43,6 +51,9 @@ def CreateUserProfile(sender, instance, created, **kwargs):
                 first_name = user.first_name,
                 last_name = user.last_name,
             )
+            # Set user permissions
+            group = Group.objects.get(name='Manager')
+            user.groups.add(group)
 
 
 # Delete account
