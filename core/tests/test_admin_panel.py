@@ -1,6 +1,14 @@
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.urls import reverse
+
+
+def sample_groups():
+    '''Create sample permissions groups'''
+    manager, created = Group.objects.get_or_create(name='Manager')
+    student, created = Group.objects.get_or_create(name='Student')
+    teacher, created = Group.objects.get_or_create(name='Teacher')
 
 
 class AdminPanelTests(TestCase):
@@ -9,6 +17,11 @@ class AdminPanelTests(TestCase):
     # setUp() function runs before every test
     def setUp(self):
         '''Create a superuser and a student user'''
+
+        # Create sample permissions groups, sample user will add to this sample groups using signals.py
+        sample_groups()
+        
+        # Create a sample superuser
         self.client = Client()
         self.admin_user = get_user_model().objects.create_superuser(
             email = 'testsuperuser@gmail.com',
@@ -20,7 +33,8 @@ class AdminPanelTests(TestCase):
         )
         # user must be logged in
         self.client.force_login(self.admin_user)
-
+        
+        # Create a sample user
         self.user = get_user_model().objects.create_user(
             email = 'testStudent@gmail.com',
             username = 'testStudent',
