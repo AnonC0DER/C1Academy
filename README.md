@@ -40,7 +40,7 @@ I used [ElephantSQL](https://elephantsql.com/) database, so I created some custo
 to make it easier to interact to ESQL database APIs. If you're using this database for your own database. <br>
 So, these commands can help you too :
 - `python manage.py backups` -> List of all backups
-- `python manage.py create_backup` -> Create a new backup
+- `python manage.py create` -> Create a new backup
 - `python manage.py restore` -> Restore a backup using its ID
 
 
