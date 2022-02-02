@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'Teacher.apps.TeacherConfig',
     'Manager.apps.ManagerConfig',
     'Message.apps.MessageConfig',
+    'rest_framework',
     'core',
 ]
 
