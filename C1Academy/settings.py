@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'Manager.apps.ManagerConfig',
     'Message.apps.MessageConfig',
     'rest_framework',
+    'rest_framework.authtoken',
     'core',
 ]
 
