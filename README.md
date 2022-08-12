@@ -11,7 +11,7 @@ And students can view their messages.
 
 ## Plans
 - [ ] Use a front-end template
-- [ ] Rest APIs
+- [x] Rest APIs
 
 
 # Setting up things
